@@ -8,7 +8,9 @@ interface CategoryProps {
 const CategoryItem: FC<CategoryProps> = ({ category }) => {
     return (
         <li>
-            {category.id}
+            <button>-</button>
+            {category.name}
+            <button>Delete</button>
             {category.subCategories.length !== 0 &&
             category.subCategories.map(subCategory =>
                 <ul key={subCategory.id}>

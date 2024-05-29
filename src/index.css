@@ -32,17 +32,18 @@ body {
 
 h1 {
   font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 1.1rem;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  /* padding: 0.6em 1.2em; */
+  margin: 0 5px;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #3e3e3e;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -52,6 +53,14 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+ul {
+  line-height: 2rem;
+}
+
+li {
+  line-height: 2rem;
 }
 
 @media (prefers-color-scheme: light) {

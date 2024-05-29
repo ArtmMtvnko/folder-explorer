@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import './App.css'
 import Category from './interfaces/Category'
 import CategoryItem from './components/CategoryItem'
+import { v4 as uuidv4 } from 'uuid';
+import './App.css'
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -9,20 +10,25 @@ function App() {
   useEffect(() => {
     const testCategories: Category[] = [
       {
-        id: 1,
+        id: uuidv4(),
+        name: 'Main of the main',
         subCategories: [
           {
-            id: 11,
+            id: uuidv4(),
+            name: 'Test',
             subCategories: []
           },
           {
-            id: 12,
+            id: uuidv4(),
+            name: 'In main',
             subCategories: [
               {
-                id: 121,
+                id: uuidv4(),
+                name: 'third layer',
                 subCategories: [
                   {
-                    id: 1211,
+                    id: uuidv4(),
+                    name: 'last',
                     subCategories: []
                   }
                 ]
@@ -32,7 +38,8 @@ function App() {
         ]
       },
       {
-        id: 2,
+        id: uuidv4(),
+        name: 'Second main',
         subCategories: []
       }
     ]
