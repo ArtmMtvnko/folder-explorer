@@ -1,5 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Category from "../interfaces/Category";
+import { CategoryContext } from "../App";
+import treeExplorer from "../utils/treeExplorer";
 
 interface CategoryProps {
     category: Category
@@ -7,8 +9,13 @@ interface CategoryProps {
 
 const CategoryItem: FC<CategoryProps> = ({ category }) => {
     const [shown, setShown] = useState(false)
+    const { categories, setCategories } = useContext(CategoryContext)
 
     const collapseExpand = () => setShown(prev => !prev)
+
+    const deleteCategory = () => {
+        setCategories(treeExplorer.deleteById(categories, category.id))
+    }
 
     return (
         <li>
@@ -17,7 +24,7 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
 
             <span>{category.name}</span>
 
-            <button>Delete</button>
+            <button onClick={deleteCategory}>Delete</button>
 
             {category.subCategories.length !== 0 && shown &&
             category.subCategories.map(subCategory =>

@@ -1,8 +1,18 @@
-import { useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import Category from './interfaces/Category'
 import CategoryItem from './components/CategoryItem'
 import { v4 as uuidv4 } from 'uuid';
 import './App.css'
+
+type TypeCategoryContext = {
+  categories: Category[],
+  setCategories: React.Dispatch<React.SetStateAction<Category[]>>
+}
+
+export const CategoryContext = createContext<TypeCategoryContext>({
+  categories: [],
+  setCategories: () => {}
+})
 
 function App() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -61,9 +71,11 @@ function App() {
           </ul>
         </li>
       </ul>
-      <ul>
-        {categories.map(category => <CategoryItem key={category.id} category={category} />)}
-      </ul>
+      <CategoryContext.Provider value={{ categories, setCategories }}>
+        <ul>
+          {categories.map(category => <CategoryItem key={category.id} category={category} />)}
+        </ul>
+      </CategoryContext.Provider>
     </>
   )
 }
