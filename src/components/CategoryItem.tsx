@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Category from "../interfaces/Category";
 
 interface CategoryProps {
@@ -6,12 +6,20 @@ interface CategoryProps {
 }
 
 const CategoryItem: FC<CategoryProps> = ({ category }) => {
+    const [shown, setShown] = useState(false)
+
+    const collapseExpand = () => setShown(prev => !prev)
+
     return (
         <li>
-            <button>-</button>
-            {category.name}
-            <button>Delete</button>
             {category.subCategories.length !== 0 &&
+            <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
+
+            {category.name}
+
+            <button>Delete</button>
+
+            {category.subCategories.length !== 0 && shown &&
             category.subCategories.map(subCategory =>
                 <ul key={subCategory.id}>
                     <CategoryItem category={subCategory} />
