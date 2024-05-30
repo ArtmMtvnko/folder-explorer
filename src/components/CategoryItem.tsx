@@ -15,7 +15,7 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
             {category.subCategories.length !== 0 &&
             <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
 
-            {category.name}
+            <span>{category.name}</span>
 
             <button>Delete</button>
 
