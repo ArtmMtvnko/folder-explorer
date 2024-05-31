@@ -28,20 +28,24 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
 
     return (
         <li>
-            {category.subCategories.length !== 0 &&
-            <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
+            <ul>
+                {
+                <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
 
-            <span>{category.name}</span>
+                <span>{category.name}</span>
 
-            <button onClick={deleteCategory}>Delete</button>
+                <button onClick={deleteCategory}>Delete</button>
 
-            {category.subCategories.length !== 0 && shown &&
-            category.subCategories.map(subCategory =>
-                <ul key={subCategory.id}>
-                    <CategoryItem category={subCategory} />
-                </ul>
-            )}
-            <button onClick={addCategory}>Add</button>
+                {category.subCategories.length !== 0 && shown &&
+                category.subCategories.map(subCategory =>
+                    <CategoryItem key={subCategory.id} category={subCategory} />
+                )}
+
+                {shown &&
+                <li style={{listStyleType: 'none'}}>
+                    <button onClick={addCategory}>Add</button>
+                </li>}
+            </ul>
         </li>
     )
 }
