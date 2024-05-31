@@ -1,0 +1,34 @@
+.expander {
+    position: relative;
+    height: 26px;
+    width: 26px;
+    color: transparent;
+}
+
+.expander::before {
+    content: '';
+    position: absolute;
+    width: 45%;
+    height: 2px;
+    transform: rotate(45deg);
+    top: 7px;
+    right: 6px;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+}
+
+.expander::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    transform: rotate(-45deg);
+    bottom: 8px;
+    right: 5px;
+    z-index: 10;
+    background-color: rgb(255, 255, 255);
+}
+
+.expander.active {
+    transform: rotate(90deg);
+}

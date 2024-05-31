@@ -3,6 +3,7 @@ import Category from "../interfaces/Category";
 import { CategoryContext, TypeCategoryContext } from "../App";
 import treeExplorer from "../utils/treeExplorer";
 import { v4 as uuidv4 } from 'uuid';
+import './CategoryItem.css'
 
 interface CategoryProps {
     category: Category
@@ -34,7 +35,6 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
         if (renamed) {
             const categoryToRename = treeExplorer.findById(categories, category.id)
             categoryToRename!.name = renamed
-            console.log(categories)
             setCategories([...categories])
         }
     }
@@ -42,8 +42,9 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
     return (
         <li>
             <ul>
-                {
-                <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
+                <button onClick={collapseExpand} className={shown ? 'expander active' : 'expander'}>
+                    <span style={{ fontFamily: 'monospace'}}>+</span>
+                </button>
 
                 <span onDoubleClick={rename}>{category.name}</span>
 
