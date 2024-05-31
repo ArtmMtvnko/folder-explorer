@@ -1,3 +1,13 @@
+# How to get started "Category tree"
+
+Clone repository on your local machine.
+
+Open terminal in this project and run follows:
+```
+npm install
+npm run dev
+```
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
