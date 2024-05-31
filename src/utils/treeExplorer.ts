@@ -17,15 +17,39 @@ function deleteById(categories: Category[], id: string): Category[] {
         if (category.id === id) {
             return acc
         }
+
         if (category.subCategories) {
             category.subCategories = deleteById(category.subCategories, id)
         }
+
         acc.push(category)
+
         return acc
     }, [])
 }
 
+function addById(categories: Category[], id: string, categoryToAdd: Category): Category[] {
+    return categories.map(category => {
+        if (category.id === id) {
+            return {
+                ...category,
+                subCategories: category.subCategories ? [...category.subCategories, categoryToAdd] : [categoryToAdd]
+            };
+        }
+
+        if (category.subCategories) {
+            return {
+                ...category,
+                subCategories: addById(category.subCategories, id, categoryToAdd)
+            };
+        }
+
+        return category;
+    });
+}
+
 export default {
     findById,
-    deleteById
+    deleteById,
+    addById
 }
