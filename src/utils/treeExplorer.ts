@@ -5,10 +5,15 @@ function findById(categories: Category[], id: string): Category | null {
         if (category.id === id) {
             return category
         }
+
         if (category.subCategories) {
-            return findById(category.subCategories, id)
+            const found = findById(category.subCategories, id)
+            if (found) {
+                return found
+            }
         }
     }
+
     return null
 }
 

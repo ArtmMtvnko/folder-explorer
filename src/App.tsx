@@ -4,7 +4,7 @@ import CategoryItem from './components/CategoryItem'
 import { v4 as uuidv4 } from 'uuid';
 import './App.css'
 
-type TypeCategoryContext = {
+export type TypeCategoryContext = {
   categories: Category[],
   setCategories: React.Dispatch<React.SetStateAction<Category[]>>
 }

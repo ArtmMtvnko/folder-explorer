@@ -1,6 +1,6 @@
 import { FC, useContext, useState } from "react";
 import Category from "../interfaces/Category";
-import { CategoryContext } from "../App";
+import { CategoryContext, TypeCategoryContext } from "../App";
 import treeExplorer from "../utils/treeExplorer";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -10,20 +10,33 @@ interface CategoryProps {
 
 const CategoryItem: FC<CategoryProps> = ({ category }) => {
     const [shown, setShown] = useState(false)
-    const { categories, setCategories } = useContext(CategoryContext)
+    const { categories, setCategories } = useContext<TypeCategoryContext>(CategoryContext)
 
-    const collapseExpand = () => setShown(prev => !prev)
+    const collapseExpand = (): void => setShown(prev => !prev)
 
-    const deleteCategory = () => {
+    const deleteCategory = (): void => {
         setCategories(treeExplorer.deleteById(categories, category.id))
     }
 
-    const addCategory = () => {
-        setCategories(treeExplorer.addById(categories, category.id, {
-            id: uuidv4(),
-            name: 'test added ca',
-            subCategories: []
-        }))
+    const addCategory = (): void => {
+        const name = prompt('Enter name of category: ')
+        if (name) {
+            setCategories(treeExplorer.addById(categories, category.id, {
+                id: uuidv4(),
+                name: name?.trim() ? name : 'New category',
+                subCategories: []
+            }))
+        }
+    }
+
+    const rename = (): void => {
+        const renamed = prompt('Enter new name of category: ')
+        if (renamed) {
+            const categoryToRename = treeExplorer.findById(categories, category.id)
+            categoryToRename!.name = renamed
+            console.log(categories)
+            setCategories([...categories])
+        }
     }
 
     return (
@@ -32,7 +45,7 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
                 {
                 <button onClick={collapseExpand}>{shown ? '-' : '+'}</button>}
 
-                <span>{category.name}</span>
+                <span onDoubleClick={rename}>{category.name}</span>
 
                 <button onClick={deleteCategory}>Delete</button>
 
