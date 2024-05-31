@@ -17,6 +17,19 @@ export const CategoryContext = createContext<TypeCategoryContext>({
 function App() {
   const [categories, setCategories] = useState<Category[]>([])
 
+  const addFirstCategory = (): void => {
+    const name = prompt('Enter name of category: ')
+    if (name) {
+      categories.push({
+        id: uuidv4(),
+        name: name?.trim() ? name : 'New category',
+        subCategories: []
+      })
+
+      setCategories([...categories])
+    }
+  }
+
   useEffect(() => {
     const testCategories: Category[] = [
       {
@@ -59,23 +72,12 @@ function App() {
 
   return (
     <>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>
-          Test
-          <ul>
-            <li>11</li>
-            <li>22</li>
-          </ul>
-        </li>
-      </ul>
       <CategoryContext.Provider value={{ categories, setCategories }}>
         <ul>
           {categories.map(category => <CategoryItem key={category.id} category={category} />)}
         </ul>
       </CategoryContext.Provider>
+      <button onClick={addFirstCategory}>Add</button>
     </>
   )
 }
