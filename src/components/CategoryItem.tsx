@@ -34,7 +34,7 @@ const CategoryItem: FC<CategoryProps> = ({ category }) => {
         const renamed = prompt('Enter new name of category: ')
         if (renamed) {
             const categoryToRename = treeExplorer.findById(categories, category.id)
-            categoryToRename!.name = renamed
+            categoryToRename!.name = renamed // remove mutation, make value chack insted of !.name
             setCategories([...categories])
         }
     }
